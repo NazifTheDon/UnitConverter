@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial</title>
+</head>
+<h2>Imperial to Metric Converter</h2>
+
+<body>
+    <p>
+        <label>Meters</label>
+        <input id="inputMeter" type="number" placeholder="Meters" oninput="FeetConverter(this.value)" onchange="FeetConverter(this.value)">
+        Feet: <span id="feet2meters"></span>
+    </p>
+      
+    <p>
+          <label>Meters</label>
+          <input id="inputMiles" type="number" placeholder="Meters" oninput="MilesConverter(this.value)" onchange="MilesConverter(this.value)">
+          Miles: <span id="miles2meters"></span> </span>
+    </p>
+
+    <p>
+        <label>Kilometers</label>
+        <input id="inputKm" type="number" placeholder="Kilometers" oninput="KilometersConverter(this.value)" onchange="KilometersConverter(this.value)">
+        Miles: <span id="kilometer2miles"></span> </span>
+    </p>
+      
+    <p>
+          <label>Celsius</label>
+          <input id="inputTemperature" type="number" placeholder="Celsius" oninput="TemperatureConverter(this.value)" onchange="TemperatureConverter(this.value)">
+          Farenheit: <span id="farenheit2celcius"></span>
+    </p>
+      
+    <p>
+          <label>Kilograms</label>
+          <input id="inputPound" type="number" placeholder="Kilograms" oninput="PoundConverter(this.value)" onchange="PoundConverter(this.value)">
+          Pounds (lbs): <span id="pounds2kilograms"></span>
+    </p>
+
+    <div id ="container">
+    
+        <button id="myButton" class="float-left submit-button" >Switch units</button>
+    </div>
+
+<script>
+
+document.getElementById("myButton").onclick = function () {
+        location.href = "index.html";
+    };
+
+    jQuery(document).ready(function($){
+    $("a").click(function(event){
+        container=$(this).attr("href")
+        $.ajax({
+            url: container
+        })
+        .done(function(html){
+            $("#page").empty.append(hmtl)
+        })
+        .fail(function(){
+            console.log("error")
+        })
+        .always(function(){
+            console.log("complete")
+        })
+        return false
+    })
+})
+
+const xhr = new XMLHttpRequest()
+const container = document.getElementById("container")
+
+xhr.onload  = function() {
+    if(this.status === 200){
+        container.innerHTML = xhr.responseText
+    } 
+    else{
+        console.warn("Something went wrong")
+    }
+}
+
+xhr.open("get", "index.html")
+xhr.send()
+
+    function FeetConverter(valNum) {
+        document.getElementById("feet2meters").innerHTML=valNum*3.2808;
+    
+}
+
+function MilesConverter(valNum) {
+  document.getElementById("miles2meters").innerHTML=valNum/1609.344;
+}
+
+function KilometersConverter(valNum) {
+        document.getElementById("kilometer2miles").innerHTML=valNum*0.621371192;
+    
+}
+function TemperatureConverter(valNum) {
+    var text = document.getElementById("inputTemperature").value
+    if (text === ""){
+        document.getElementById("farenheit2celcius").innerHTML = "";
+    }
+    else{
+    document.getElementById("farenheit2celcius").innerHTML=(valNum*1.8) +32;
+    }
+}
+
+function PoundConverter(valNum) {
+        document.getElementById("pounds2kilograms").innerHTML=valNum/0.45359237;
+    
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<title>Metric</title>
+<body>
+
+<div id="Metric">
+<h2>Metric to Imperial Converter</h2>
+
+<p>
+    <label>Inches</label>
+    <input id="inputInches" type="number" placeholder="Inches" oninput="InchesConverter(this.value)" onchange="InchesConverter(this.value)">
+    Centimeters: <span id="inches2centimeters"></span>
+</p>
+
+<p>
+  <label>Feet</label>
+  <input id="inputFeet" type="number" placeholder="Feet" oninput="FeetConverter(this.value)" onchange="FeetConverter(this.value)">
+  Meters: <span id="feet2meters"></span>
+</p>
+
+<p>
+    <label>Miles</label>
+    <input id="inputMiles" type="number" placeholder="Miles" oninput="MilesConverter(this.value)" onchange="MilesConverter(this.value)">
+    Meters: <span id="miles2meters"></span> - Km: <span id="miles2km"></span>
+</p>
+
+<p>
+    <label>Temperature</label>
+    <input id="inputTemperature" type="number" placeholder="Farenheit" oninput="TemperatureConverter(this.value)" onchange="TemperatureConverter(this.value)">
+    Celsius: <span id="farenheit2celcius"></span>
+</p>
+
+<p>
+    <label>Pounds (lbs)</label>
+    <input id="inputPound" type="number" placeholder="Pounds (lbs)" oninput="PoundConverter(this.value)" onchange="PoundConverter(this.value)">
+    Kilograms: <span id="pounds2kilograms"></span>
+</p>
+</div>
+<div id ="container">
+    
+    <button id="myButton" class="float-left submit-button" >Switch units</button>
+</div>
+<script>
+
+//ADMINISTRATIVE CRAP
+document.getElementById("myButton").onclick = function () {
+        location.href = "Imperial2Metric.html";
+    };
+
+jQuery(document).ready(function($){
+    $("a").click(function(event){
+        container=$(this).attr("href")
+        $.ajax({
+            url: container
+        })
+        .done(function(html){
+            $("#page").empty.append(hmtl)
+        })
+        .fail(function(){
+            console.log("error")
+        })
+        .always(function(){
+            console.log("complete")
+        })
+        return false
+    })
+})
+
+const xhr = new XMLHttpRequest()
+const container = document.getElementById("container")
+
+xhr.onload  = function() {
+    if(this.status === 200){
+        container.innerHTML = xhr.responseText
+    } 
+    else{
+        console.warn("Something went wrong")
+    }
+}
+
+xhr.open("get", "Imperial2Metric.html")
+xhr.send()
+
+
+// FUNCTIONS
+
+function InchesConverter(valNum) {
+        document.getElementById("inches2centimeters").innerHTML=valNum*2.54;
+    
+}
+
+function FeetConverter(valNum) {
+        document.getElementById("feet2meters").innerHTML=valNum/3.2808;
+    
+}
+
+function MilesConverter(valNum) {
+  document.getElementById("miles2meters").innerHTML=valNum*1609.344;
+  document.getElementById("miles2km").innerHTML=valNum*1.609344;
+}
+
+function TemperatureConverter(valNum) {
+    var text = document.getElementById("inputTemperature").value
+    if (text === ""){
+        document.getElementById("farenheit2celcius").innerHTML = "";
+    }
+    else{
+    document.getElementById("farenheit2celcius").innerHTML=(valNum-32)*(5/9);
+    }
+}
+
+function PoundConverter(valNum) {
+        document.getElementById("pounds2kilograms").innerHTML=valNum*0.45359237;
+    
+}
+
+</script>
+</body>
+</html>
