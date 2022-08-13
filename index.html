@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <title>Metric</title>
-<body>
 
-<div id="Metric">
+<body id="metric_body">
+<link rel="stylesheet" href="style.css">
+<div id="metric">
+
+<div id="general">
 <h2>Metric to Imperial Converter</h2>
 
 <p>
@@ -35,11 +38,13 @@
     <input id="inputPound" type="number" placeholder="Pounds (lbs)" oninput="PoundConverter(this.value)" onchange="PoundConverter(this.value)">
     Kilograms: <span id="pounds2kilograms"></span>
 </p>
-</div>
+
 <div id ="container">
     
     <button id="myButton" class="float-left submit-button" >Switch units</button>
 </div>
+</div>
+</body>
 <script>
 
 //ADMINISTRATIVE CRAP
@@ -115,5 +120,6 @@ function PoundConverter(valNum) {
 }
 
 </script>
-</body>
+
+</div>
 </html>

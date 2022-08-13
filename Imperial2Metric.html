@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imperial</title>
 </head>
+<link rel="stylesheet" href="style.css">
+<div id="imperial" >
+<div id="general">
 <h2>Imperial to Metric Converter</h2>
 
-<body>
+
+<body id="imperial_body">
     <p>
         <label>Meters</label>
         <input id="inputMeter" type="number" placeholder="Meters" oninput="FeetConverter(this.value)" onchange="FeetConverter(this.value)">
@@ -43,7 +45,8 @@
     
         <button id="myButton" class="float-left submit-button" >Switch units</button>
     </div>
-
+</div>
+</div>
 <script>
 
 document.getElementById("myButton").onclick = function () {
